@@ -1,4 +1,6 @@
-# Shiny Dashboard to visualize RNA and Protein localised to protrusions
+# RNA & Protein localised to protrusions
+Shiny Dashboard to visualize RNA and Protein localised to protrusions
+
 
 ===============
 
