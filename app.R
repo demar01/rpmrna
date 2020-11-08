@@ -22,7 +22,7 @@ pivot_longer(-Gene.name, names_to="cell",values_to="log2") %>%
     mutate_if(is.character,as.factor) 
     
 bp3 %>% 
-    filter(Gene.name=="RPS20") %>%
+    filter(Gene.name=="AAAS") %>%
 ggplot(aes(fct_inorder(cell),log2,fill= cell))+
     geom_col()+
     ylab("Log2 prot/body") + 
@@ -44,15 +44,17 @@ proteins3 %>%
     geom_col()+
     ylab("Log2 prot/body") + 
     xlab("") + 
-    labs(title = "Log2 (protrusion/cell body) protein")+
+    labs(title = "Log2 (protrusion/cell body) Protein")+
     theme_minimal()+
-    theme(legend.position = "none") 
+    theme(legend.position = "none",
+         text = element_text(size=20),
+        axis.text.x = element_text(size=20)) 
 
 ui <- dashboardPage(
     dashboardHeader(title = "Dermit et al. 2020"),
     
     dashboardSidebar(
-        selectizeInput("v_gene", "Gene",options = list(maxOptions = 10000),
+        selectizeInput("v_gene", "mRNA",options = list(maxOptions = 10000),
                     choices = bp3 %>% select( Gene.name ) %>% distinct()),
         
         selectizeInput("v_protein", "Protein", options = list(maxOptions = 10000),
@@ -88,7 +90,9 @@ server <- function(input, output) {
             xlab("") + 
             labs(title = "Log2 (protrusion/cell-body) protein")+
             theme_minimal()+
-            theme(legend.position = "none") 
+            theme(legend.position = "none",
+                  text = element_text(size=20),
+        axis.text.x = element_text(size=20))
         
     })
     
